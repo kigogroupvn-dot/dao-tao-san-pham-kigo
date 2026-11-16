@@ -1,0 +1,902 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<title>Đào tạo sản phẩm Kigo Group</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Mona+Sans:wght@400;500;600;700&display=swap">
+<style>
+@font-face{font-family:"SVN Gilroy";src:url("fonts/gilroy-bold.otf") format("opentype");font-weight:700;font-display:swap}
+@font-face{font-family:"SVN Gilroy";src:url("fonts/gilroy-black.otf") format("opentype");font-weight:900;font-display:swap}
+@font-face{font-family:"Photograph Signature";src:url("fonts/photograph-signature.otf") format("opentype");font-display:swap}
+/* Giữ nguyên hệ thống của slide cũ (phan-cong-trien-khai-marketing/slide): khung 1600×900, cột mục lục trái, nền trắng, đường kẻ mảnh, đỏ chỉ ở khối bìa và điểm nhấn. Luôn nền sáng. */
+:root{
+  --crimson:#AC2436; --velvet:#8E0F0B; --misty:#FDE3DD; --flamingo:#F9BAB7; --white:#FFFFFF;
+  --text:#353535; --muted:#76696B; --grey:#C9C9C9; --rule:#EAD7D2; --paper:#FBF7F6;
+  --f-title:"Philosopher",Georgia,serif;
+  --f-head:"SVN Gilroy","Mona Sans",system-ui,sans-serif;
+  --f-body:"Mona Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-script:"Photograph Signature","Brush Script MT",cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--f-body);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--flamingo);outline-offset:2px}
+
+/* ---------- APP SHELL ---------- */
+.app{display:grid;grid-template-columns:260px 1fr;height:100%}
+.rail{background:var(--white);border-right:1px solid var(--rule);display:flex;flex-direction:column;padding:28px 0 20px;min-height:0}
+.rail .brand{padding:0 28px 22px;border-bottom:1px solid var(--rule)}
+.rail .brand svg{width:116px;height:auto;color:var(--crimson);display:block}
+.rail .brand small{display:block;margin-top:12px;font-size:12px;color:var(--muted);line-height:1.5}
+.toc{list-style:none;margin:0;padding:14px 0;overflow-y:auto;flex:1}
+.toc .part{font-family:var(--f-head);font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:14px 28px 6px}
+.toc button{display:grid;grid-template-columns:30px 1fr;gap:8px;width:100%;text-align:left;background:none;border:none;padding:9px 28px;cursor:pointer;font-size:13.5px;line-height:1.35;color:var(--muted);border-left:3px solid transparent}
+.toc button:hover{color:var(--text);background:var(--paper)}
+.toc button[aria-current="true"]{color:var(--velvet);border-left-color:var(--crimson);background:var(--paper);font-weight:600}
+.toc .n{font-family:var(--f-head);font-weight:700;font-size:12px;color:var(--crimson);padding-top:1px;font-variant-numeric:tabular-nums}
+.rail .foot{padding:16px 28px 0;border-top:1px solid var(--rule);display:grid;gap:10px}
+.play{white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--crimson);color:var(--white);border:none;border-radius:8px;padding:11px 14px;font-family:var(--f-head);font-weight:700;font-size:13px;letter-spacing:.06em;cursor:pointer}
+.play:hover{background:var(--velvet)}
+.updated{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+.stagewrap{position:relative;min-width:0;min-height:0;display:grid;place-items:center;overflow:hidden}
+.stage{width:1600px;height:900px;position:absolute;left:50%;top:calc(50% - 22px);transform-origin:center center;transform:translate(-50%,-50%) scale(.5)}
+body.show .stage{top:50%}
+.nav{position:absolute;right:24px;bottom:18px;display:flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--rule);border-radius:999px;padding:4px;z-index:5}
+.nav button{width:36px;height:36px;border-radius:50%;border:none;background:none;cursor:pointer;font-size:16px;color:var(--velvet)}
+.nav button:hover{background:var(--misty)}
+.nav span{font-family:var(--f-head);font-weight:700;font-size:12px;min-width:52px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums}
+body.show .app{grid-template-columns:1fr}
+body.show .rail{display:none}
+body.show .nav{opacity:0;transition:opacity .2s}body.show .nav:hover,body.show .nav:focus-within{opacity:1}
+body.show .stagewrap{background:#1d1416}
+
+/* ---------- SLIDE BASE ---------- */
+.slide{position:absolute;inset:0;background:var(--white);display:none;flex-direction:column;padding:80px 96px 0;box-shadow:0 1px 3px rgba(80,20,20,.06),0 20px 60px rgba(80,20,20,.08);overflow:hidden}
+.slide.on{display:flex}
+@media (prefers-reduced-motion:no-preference){.slide.on{animation:fade .35s ease-out}@keyframes fade{from{opacity:0}to{opacity:1}}}
+.kicker{font-family:var(--f-head);font-weight:700;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson)}
+.slide h2{font-family:var(--f-title);font-weight:700;font-size:60px;line-height:1.08;color:var(--velvet);margin:14px 0 0;text-wrap:balance;max-width:1200px}
+.sfoot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--rule);padding:18px 0 22px;font-size:13px;color:var(--muted);margin-top:auto}
+.sfoot svg{width:70px;height:auto;color:var(--crimson)}
+.sfoot .pg{font-family:var(--f-head);font-weight:700;font-variant-numeric:tabular-nums;color:var(--velvet)}
+
+/* KPI strip */
+.kpis{display:flex;gap:0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.kpi{flex:1;padding:18px 22px 18px 0;display:grid;gap:4px;align-content:start}
+.kpi+.kpi{padding-left:22px;border-left:1px solid var(--rule)}
+.kpi b{font-family:var(--f-head);font-weight:900;font-size:40px;line-height:1;color:var(--crimson);font-variant-numeric:tabular-nums;letter-spacing:-.01em;white-space:nowrap}
+.kpi b small{font-size:.5em;font-weight:700;margin-left:3px;letter-spacing:0}
+.kpi span{font-size:15.5px;color:var(--text)}
+
+/* ---------- COVER ---------- */
+.cover{padding:0;flex-direction:row}
+.cover .panel{width:560px;background:var(--crimson);color:var(--white);display:flex;flex-direction:column;justify-content:space-between;padding:80px 72px 64px}
+.cover .panel svg{width:260px;height:auto;color:var(--white)}
+.cover .panel .meta{display:grid;gap:18px;font-size:16px;color:var(--misty)}
+.cover .panel .meta b{display:block;font-family:var(--f-head);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--flamingo);margin-bottom:4px}
+.cover .panel .meta span{color:var(--white);font-size:19px}
+.cover .main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 110px}
+.cover h1{font-family:var(--f-title);font-weight:700;font-size:88px;line-height:1;color:var(--velvet);margin:22px 0 0;letter-spacing:-.01em}
+.cover .script{font-family:var(--f-script);font-size:92px;color:var(--crimson);display:block;margin:30px 0 0 8px;transform:rotate(-3deg);transform-origin:left;line-height:1}
+.cover .goals{display:flex;margin:48px 0 0;padding:26px 0 0;border-top:1px solid var(--rule);list-style:none;font-size:21px;color:var(--text)}
+.cover .goals li+li{margin-left:28px;padding-left:28px;border-left:1px solid var(--rule)}
+.cover .brands{margin-top:26px;font-family:var(--f-head);font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.cover .brands i{font-style:normal;color:var(--flamingo);margin:0 12px}
+
+/* ---------- PART 1 ---------- */
+.body{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;padding-block:28px}
+.lede{font-family:var(--f-title);font-size:36px;line-height:1.3;color:var(--velvet);margin:0}
+.lede b{color:var(--crimson)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.duo.w{grid-template-columns:1.1fr 1fr}
+.line{display:grid;gap:6px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.line:first-child{border-top:1px solid var(--rule)}
+.line .tag,.tagx{font-family:var(--f-head);font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson)}
+.line p{margin:0;font-size:21px;line-height:1.55}
+.kpis.mt{margin-top:52px}
+.kpi b.w{font-size:30px;padding-block:5px}
+.ask{display:grid;grid-template-columns:64px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.ask:first-child{border-top:1px solid var(--rule)}
+.ask .k{font-family:var(--f-head);font-weight:900;font-size:30px;line-height:1;color:var(--crimson)}
+.ask b{display:block;font-family:var(--f-title);font-size:26px;color:var(--velvet);line-height:1.25}
+.ask p{margin:6px 0 0;font-size:17px;color:var(--muted);line-height:1.5}
+.who3{display:flex;gap:0;margin-top:34px;border-top:1px solid var(--rule)}
+.who3 div{flex:1;padding:20px 0 0}
+.who3 div+div{padding-left:28px;border-left:1px solid var(--rule)}
+.who3 b{display:block;font-family:var(--f-title);font-size:30px;color:var(--velvet)}
+.who3 span{font-size:15px;color:var(--muted)}
+.pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:32px}
+.pillar{border-top:3px solid var(--crimson);padding-top:22px;display:grid;gap:12px;align-content:start}
+.pillar .k{font-family:var(--f-head);font-weight:900;font-size:22px;color:var(--flamingo)}
+.pillar h3{font-family:var(--f-title);font-size:28px;line-height:1.2;color:var(--velvet);margin:0}
+.note{margin-top:48px;background:var(--misty);padding:28px 36px;font-size:20px;line-height:1.5;color:var(--velvet);display:grid;grid-template-columns:200px 1fr;gap:28px;align-items:baseline}
+.note .tagx{color:var(--crimson)}
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.step{padding:0 40px 0 0;display:grid;gap:14px;align-content:start;position:relative}
+.step+.step{padding-left:40px;border-left:1px solid var(--rule)}
+.step h3{font-family:var(--f-title);font-size:34px;color:var(--velvet);margin:0;line-height:1.15}
+.step p{margin:0;font-size:18px;line-height:1.55}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid var(--rule);border-radius:999px;padding:6px 14px;font-size:15.5px;background:var(--white)}
+.event{background:var(--velvet);color:var(--white);padding:44px;display:flex;flex-direction:column;justify-content:space-between;gap:24px}
+.event .tagx{color:var(--flamingo)}
+.event p{margin:0;font-family:var(--f-title);font-size:38px;line-height:1.25}
+.side{background:var(--misty);padding:36px 36px 30px;display:grid;gap:20px;align-content:start}
+.side h3{margin:0;font-family:var(--f-title);font-size:28px;line-height:1.2;color:var(--velvet)}
+.side div b{display:block;font-weight:600;font-size:18px;color:var(--velvet)}
+.side div span{font-size:16.5px;line-height:1.5}
+.small{margin:22px 0 0;font-size:16px;color:var(--muted);line-height:1.5}
+
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:18px}
+.tbl th{font-family:var(--f-head);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 20px 12px 0;border-bottom:1.5px solid var(--velvet)}
+.tbl td{padding:16px 20px 16px 0;border-bottom:1px solid var(--rule);vertical-align:top;line-height:1.45}
+.tbl td.ch{font-family:var(--f-title);font-weight:700;font-size:22px;color:var(--velvet);white-space:nowrap}
+.tbl td.fig,.tbl th.fig{font-family:var(--f-head);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.tbl td.fig b{color:var(--crimson);font-weight:900}
+.tbl.tight td{padding:11px 20px 11px 0;font-size:17.5px}
+.tbl.tight td.ch{font-size:19px;white-space:normal}
+
+/* ---------- PRODUCT ---------- */
+.prod{padding:0;flex-direction:row}
+.prod .pic{width:520px;flex:none;background:var(--paper);border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:space-between;padding:56px 56px 40px;overflow:hidden}
+.prod .pic .ph{flex:1;min-height:0;display:grid;place-items:center;padding:10px 0 30px}
+.prod .pic img{max-width:100%;max-height:560px;object-fit:contain;display:block}
+.prod .pic .ph.two-img{grid-template-columns:1fr 1fr;gap:18px}
+.prod .pic .ph.two-img figure{margin:0;display:grid;gap:12px;justify-items:center;text-align:center;font-size:14px;color:var(--muted)}
+.prod .price{border-top:1px solid var(--rule);padding-top:20px;display:grid;gap:6px}
+.prod .price span{font-size:15px;color:var(--muted)}
+.prod .price b{font-family:var(--f-head);font-weight:900;font-size:50px;line-height:1;color:var(--crimson);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.prod .pmain{flex:1;min-width:0;display:flex;flex-direction:column;padding:0 80px 0 72px}
+.prod .pbody{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:20px}
+.prod h2{font-size:54px}
+.prod .lead{font-family:var(--f-title);font-style:italic;font-size:26px;line-height:1.3;color:var(--text);margin:14px 0 0;max-width:900px}
+.prod .desc{font-size:17.5px;line-height:1.6;margin:20px 0 24px;max-width:900px}
+.prod .desc+.desc{margin-top:-12px}
+.klabel{font-family:var(--f-head);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.prod .two{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;margin-top:24px}
+.prod .two.eq{grid-template-columns:1fr 1fr}
+.prod .two h4,.prod h4{margin:0 0 8px;font-family:var(--f-head);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson)}
+.prod .two p{margin:0;font-size:17px;line-height:1.55}
+.ing{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule)}
+.ing div{padding:13px 24px 13px 0;border-bottom:1px solid var(--rule);font-size:16.5px;line-height:1.45}
+.ing div:nth-child(even){padding-left:24px;border-left:1px solid var(--rule)}
+.ing b{display:block;font-weight:600;color:var(--velvet);font-size:17.5px}
+.ing div.full{grid-column:1/-1;padding-left:0;border-left:none;color:var(--muted)}
+.dots{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.dots li{position:relative;padding-left:22px;font-size:17px;line-height:1.5}
+.dots li::before{content:"";position:absolute;left:2px;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--crimson)}
+.kpis.words .kpi b{font-size:24px;padding-block:6px;letter-spacing:0}
+.vs{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.vs div{padding:18px 26px 18px 0}
+.vs div+div{padding-left:26px;border-left:1px solid var(--rule)}
+.vs b{display:block;font-family:var(--f-head);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.vs div+div b{color:var(--crimson)}
+.vs p{margin:0;font-size:17px;line-height:1.5}
+.tip{margin-top:22px;font-size:17.5px;line-height:1.5;color:var(--velvet);border-left:3px solid var(--crimson);padding:4px 0 4px 20px}
+
+/* ---------- PART 3 ---------- */
+.quote{font-family:var(--f-title);font-style:italic;font-size:42px;line-height:1.3;color:var(--velvet);margin:30px 0 0;padding-left:34px;border-left:4px solid var(--crimson);max-width:1280px}
+.advise{margin-top:40px;display:grid;grid-template-columns:1fr 1.25fr;gap:64px;align-items:start}
+.advise .intro p{margin:0;font-size:21px;line-height:1.6}
+.advise .intro p+p{margin-top:16px}
+.advise .ask{padding:15px 0}.advise .ask b{font-size:25px}.advise .ask p{font-size:18px;margin-top:3px}.advise .ask .k{font-size:24px}
+.ask.compact{grid-template-columns:52px 1fr}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:30px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.layers div{padding:22px 30px 22px 0}
+.layers div+div{padding-left:30px;border-left:1px solid var(--rule)}
+.layers b{display:block;font-family:var(--f-head);font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--crimson);margin-bottom:8px}
+.layers p{margin:0;font-family:var(--f-title);font-size:28px;line-height:1.3;color:var(--velvet)}
+.layers p small{display:block;font-family:var(--f-body);font-size:18px;color:var(--text);margin-top:6px}
+.closing{margin-top:34px;font-family:var(--f-title);font-size:28px;line-height:1.35;color:var(--crimson)}
+.lead3{font-size:21px;line-height:1.6;margin:36px 0 0;max-width:1300px}
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;margin-top:8px}
+.qa.one{grid-template-columns:1fr}
+.qa>div{padding:22px 0;border-bottom:1px solid var(--rule)}
+.qa>div:nth-child(-n+2){border-top:1px solid var(--rule)}
+.qa.one>div:nth-child(2){border-top:none}
+.qa b{display:block;font-family:var(--f-title);font-size:26px;line-height:1.25;color:var(--velvet)}
+.qa p{margin:8px 0 0;font-size:18.5px;line-height:1.55}
+.qa.one{grid-template-columns:1fr}
+.qa.one>div{display:grid;grid-template-columns:440px 1fr;gap:40px;align-items:baseline}
+.qa.one p{margin:0;font-size:20px}
+
+/* ---------- IMAGE SLIDES (Ninemila, chèn nguyên) ---------- */
+.slide.img{padding:0;background:#fff}
+.slide.img img{width:100%;height:100%;object-fit:cover;display:block}
+.slide.img .pgtag{position:absolute;right:22px;bottom:16px;font-family:var(--f-head);font-weight:700;font-size:13px;color:var(--velvet);background:rgba(255,255,255,.85);border-radius:999px;padding:5px 12px;font-variant-numeric:tabular-nums}
+
+/* ---------- SỬA NỘI DUNG ---------- */
+.editbtn{white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--white);color:var(--crimson);border:1px solid var(--crimson);border-radius:8px;padding:10px 14px;font-family:var(--f-head);font-weight:700;font-size:13px;letter-spacing:.06em;cursor:pointer}
+.editbtn:hover{background:var(--misty)}
+.editbar{position:absolute;left:24px;right:24px;top:12px;z-index:6;display:flex;align-items:center;gap:12px;background:var(--white);border:1px solid var(--crimson);border-radius:10px;padding:8px 10px 8px 16px;font-size:13.5px;color:var(--text);box-shadow:0 6px 20px rgba(80,20,20,.10)}
+.editbar .msg{flex:1;min-width:0}
+.editbar .msg b{color:var(--velvet)}
+.editbar button{border:none;border-radius:7px;padding:8px 16px;font-family:var(--f-head);font-weight:700;font-size:12.5px;letter-spacing:.05em;cursor:pointer}
+.editbar .save{background:var(--crimson);color:var(--white)}.editbar .save:hover{background:var(--velvet)}
+.editbar .save:disabled{opacity:.5;cursor:default}
+.editbar .cancel{background:var(--paper);color:var(--velvet)}.editbar .cancel:hover{background:var(--misty)}
+body.editing [data-k]{cursor:text;border-radius:3px;outline:1px dashed transparent;outline-offset:3px;transition:outline-color .15s}
+body.editing [data-k]:hover{outline-color:var(--flamingo)}
+body.editing [data-k]:focus{outline:2px solid var(--crimson);background:rgba(253,227,221,.45)}
+body.editing [data-k].changed{outline-color:var(--flamingo);outline-style:solid}
+
+/* ---------- PHONE ---------- */
+@media (max-width:900px){
+  html,body{height:auto}
+  .app{display:block}
+  .rail{position:sticky;top:0;z-index:10;flex-direction:row;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;border-right:none;border-bottom:1px solid var(--rule)}
+  .rail .brand{padding:0;border:none}.rail .brand svg{width:84px}.rail .brand small,.toc,.rail .foot .play{display:none}
+  .rail .foot{border:none;padding:0}
+  .stagewrap{display:block;overflow:visible}
+  .stage{position:static;width:auto;height:auto;transform:none!important;display:grid;gap:14px;padding:14px 12px 40px}
+  .nav{display:none}
+  .slide{position:relative;inset:auto;display:flex!important;padding:32px 20px 0;animation:none!important}
+  .slide h2,.prod h2{font-size:30px}.kicker{font-size:12px}
+  .body{padding-block:20px}
+  .kpis{flex-wrap:wrap}.kpi,.kpi+.kpi{flex:1 1 45%;padding:12px 0;border-left:none}
+  .kpi b{font-size:28px}.kpi b.w,.kpis.words .kpi b{font-size:20px}
+  .cover{flex-direction:column}.cover .panel{width:auto;padding:32px 24px;gap:28px}.cover .panel svg{width:150px}
+  .cover .main{padding:36px 20px 40px}.cover h1{font-size:46px}.cover .script{font-size:50px}
+  .cover .goals{flex-direction:column;gap:8px;font-size:16px}.cover .goals li+li{margin:0;padding:0;border:none}
+  .cover,.prod{padding:0!important}.cover .brands{font-size:11px;letter-spacing:.12em;line-height:2}.cover .brands i{margin:0 6px}
+  .lede{font-size:24px}.line p{font-size:16px}
+  .duo,.duo.w,.advise,.qa,.qa.one>div{grid-template-columns:1fr;gap:20px}
+  .pillars,.flow,.layers{grid-template-columns:1fr;gap:20px}
+  .step,.step+.step,.layers div,.layers div+div{padding:0;border-left:none}
+  .who3{flex-direction:column}.who3 div+div{padding-left:0;border-left:none}
+  .note{grid-template-columns:1fr;gap:8px;font-size:16px;padding:20px}
+  .event p{font-size:26px}.event{padding:28px}
+  .tbl{font-size:15px}.tbl thead{display:none}.tbl,.tbl tbody,.tbl tr,.tbl td{display:block}
+  .tbl tr{padding:12px 0;border-bottom:1px solid var(--rule)}.tbl td{border:none;padding:3px 0;text-align:left!important}.tbl td.ch{font-size:19px;white-space:normal}
+  .prod{flex-direction:column}.prod .pic{width:auto;border-right:none;border-bottom:1px solid var(--rule);padding:24px 20px}
+  .prod .pic img{max-height:260px}.prod .price b{font-size:34px}
+  .prod .pmain{padding:28px 20px 0}.prod .lead{font-size:20px}.prod .desc{font-size:16px}
+  .prod .two,.prod .two.eq,.ing,.vs{grid-template-columns:1fr;gap:16px}
+  .ing div:nth-child(even),.vs div+div{padding-left:0;border-left:none}
+  .quote{font-size:24px;padding-left:18px}
+  .qa b{font-size:19px}
+  .slide.img{padding:0}.slide.img img{height:auto;aspect-ratio:16/9}
+  .sfoot{padding:14px 0 18px;gap:10px}.sfoot>span:nth-child(2){display:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="60 54 506 214"><path fill="currentColor" d="M 347.8125 149.964844 L 322.941406 121.890625 C 319.371094 117.859375 313.0625 117.902344 309.542969 121.980469 L 296.761719 136.789062 C 293.664062 140.382812 290.359375 143.789062 286.871094 147.003906 L 295.527344 147.003906 C 295.839844 144.585938 298.132812 141.808594 300.175781 139.445312 L 309.175781 129.027344 C 310.550781 127.433594 313.019531 127.421875 314.414062 129 L 341.035156 159.175781 L 341.914062 160.171875 C 341.910156 160.175781 341.90625 160.183594 341.902344 160.1875 C 334.429688 170.519531 324.15625 176.890625 312.828125 176.890625 C 289.953125 176.890625 271.402344 150.929688 271.402344 118.902344 C 271.402344 86.859375 289.953125 60.898438 312.828125 60.898438 C 335.699219 60.898438 354.25 86.859375 354.25 118.902344 C 354.25 130.328125 351.882812 140.976562 347.8125 149.964844 M 312.828125 58.214844 C 285.144531 58.214844 262.699219 85.390625 262.699219 118.902344 C 262.699219 152.414062 285.144531 179.574219 312.828125 179.574219 C 340.507812 179.574219 362.953125 152.414062 362.953125 118.902344 C 362.953125 85.390625 340.507812 58.214844 312.828125 58.214844 "/><path fill="currentColor" d="M 322.410156 91.421875 L 303.148438 115.480469 C 302.5 116.199219 301.308594 115.738281 301.308594 114.773438 L 301.308594 96.117188 L 301.351562 92.882812 C 301.351562 92.757812 301.351562 92.644531 301.359375 92.519531 C 301.359375 92.453125 301.359375 92.371094 301.371094 92.304688 C 301.453125 88.671875 302.015625 86 302.628906 84.132812 L 290.054688 84.132812 C 290.664062 86 291.21875 88.671875 291.3125 92.304688 C 291.324219 92.328125 291.324219 92.347656 291.324219 92.371094 C 291.332031 92.542969 291.34375 92.710938 291.34375 92.882812 L 291.34375 127.253906 C 291.34375 129.34375 293.546875 130.910156 295.402344 129.953125 C 295.957031 129.667969 296.542969 129.171875 297.019531 128.769531 C 298.566406 127.46875 299.78125 125.789062 301.316406 124.160156 L 327.675781 92.042969 C 328.375 91.238281 329.167969 90.367188 330.039062 89.464844 C 330.164062 89.328125 330.300781 89.191406 330.4375 89.054688 C 332.191406 87.277344 334.226562 85.46875 336.445312 84.132812 L 324.980469 84.132812 C 324.996094 87.390625 324 89.773438 322.410156 91.421875 "/><path fill="currentColor" d="M 98.714844 261.132812 L 80.878906 236.527344 L 94.699219 218.925781 C 95.308594 218.167969 95.765625 217.65625 96.105469 217.367188 L 96.273438 217.152344 L 97.472656 216.453125 L 89.515625 216.453125 L 89.359375 217.042969 C 88.96875 217.675781 88.617188 218.1875 88.308594 218.574219 L 74.261719 236.722656 L 74.261719 218.75 C 74.261719 217.820312 74.324219 217.441406 74.378906 217.285156 L 74.78125 216.453125 L 64.15625 216.453125 L 64.492188 217.089844 L 64.558594 217.28125 C 64.613281 217.441406 64.675781 217.824219 64.675781 218.75 L 64.675781 261.296875 C 64.675781 262.003906 64.632812 262.527344 64.550781 262.847656 L 64.496094 263.058594 L 64.085938 263.660156 L 74.613281 263.660156 L 74.378906 262.828125 C 74.324219 262.671875 74.261719 262.277344 74.261719 261.296875 L 74.261719 242.539062 L 87.699219 261.464844 C 88.171875 262.128906 88.472656 262.652344 88.597656 263.011719 L 88.78125 263.660156 L 100.921875 263.660156 L 99.953125 262.714844 C 99.742188 262.515625 99.328125 261.980469 98.714844 261.132812 "/><path fill="currentColor" d="M 127.84375 217.285156 L 128.242188 216.453125 L 117.554688 216.453125 L 117.886719 217.089844 L 117.953125 217.285156 C 118.078125 217.640625 118.136719 218.132812 118.136719 218.75 L 118.136719 261.296875 C 118.136719 261.957031 118.078125 262.472656 117.953125 262.828125 L 117.722656 263.660156 L 128.105469 263.660156 L 127.828125 262.789062 C 127.765625 262.667969 127.660156 262.308594 127.660156 261.296875 L 127.660156 218.75 C 127.660156 218.132812 127.71875 217.640625 127.84375 217.285156 "/><path fill="currentColor" d="M 228.46875 220.265625 C 237.808594 220.265625 242.542969 226.890625 242.542969 239.957031 C 242.542969 251.296875 239.113281 257.792969 232.347656 259.269531 C 230.863281 259.609375 229.445312 259.78125 228.136719 259.78125 C 223.890625 259.78125 220.554688 258.140625 218.214844 254.902344 C 215.726562 251.511719 214.464844 246.480469 214.464844 239.957031 C 214.464844 226.890625 219.175781 220.265625 228.46875 220.265625 M 228.46875 215.738281 C 220.8125 215.738281 214.804688 217.863281 210.605469 222.050781 C 206.40625 226.234375 204.277344 232.28125 204.277344 240.023438 C 204.277344 247.71875 206.40625 253.746094 210.605469 257.933594 C 214.804688 262.121094 220.8125 264.242188 228.46875 264.242188 C 236.171875 264.242188 242.203125 262.121094 246.402344 257.933594 C 250.601562 253.746094 252.730469 247.699219 252.730469 239.957031 C 252.730469 232.261719 250.601562 226.234375 246.402344 222.050781 C 242.203125 217.863281 236.171875 215.738281 228.46875 215.738281 "/><path fill="currentColor" d="M 371.972656 230.035156 C 371.972656 232.785156 371.0625 234.949219 369.269531 236.464844 C 367.457031 237.992188 364.847656 238.789062 361.503906 238.828125 L 360.71875 238.828125 C 360.507812 238.804688 360.332031 238.789062 360.1875 238.777344 L 360.1875 220.851562 L 362.375 220.851562 C 367.832031 220.851562 370.882812 223 371.710938 227.425781 C 371.882812 228.363281 371.972656 229.238281 371.972656 230.035156 M 385.425781 262.730469 C 384.941406 262.085938 384.519531 261.550781 384.171875 261.128906 L 369.6875 241.710938 C 373.074219 241.035156 375.867188 239.800781 377.984375 238.035156 C 380.53125 235.871094 381.824219 233.046875 381.824219 229.644531 C 381.824219 228.328125 381.617188 226.949219 381.210938 225.546875 C 379.804688 220.652344 375.839844 217.660156 369.429688 216.648438 C 368.304688 216.476562 367.277344 216.386719 366.378906 216.386719 L 350.21875 216.453125 L 350.550781 217.089844 L 350.609375 217.25 C 350.691406 217.664062 350.734375 218.167969 350.734375 218.75 L 350.734375 261.296875 C 350.734375 262.003906 350.695312 262.527344 350.609375 262.847656 L 350.558594 263.058594 L 350.144531 263.660156 L 360.703125 263.660156 L 360.4375 262.816406 C 360.316406 262.507812 360.253906 261.996094 360.253906 261.296875 L 360.253906 242.8125 L 373.289062 261.457031 C 373.671875 262.039062 373.957031 262.566406 374.125 263.011719 L 374.304688 263.660156 L 386.625 263.660156 L 385.679688 262.976562 Z M 385.425781 262.730469 "/><path fill="currentColor" d="M 413.328125 254.902344 C 410.835938 251.507812 409.574219 246.484375 409.574219 239.957031 C 409.574219 226.890625 414.285156 220.265625 423.578125 220.265625 C 432.917969 220.265625 437.652344 226.890625 437.652344 239.957031 C 437.652344 251.296875 434.222656 257.792969 427.460938 259.269531 L 427.457031 259.269531 C 425.972656 259.609375 424.554688 259.78125 423.246094 259.78125 C 419 259.78125 415.664062 258.140625 413.328125 254.902344 M 423.578125 215.738281 C 415.925781 215.738281 409.914062 217.859375 405.714844 222.046875 C 401.519531 226.234375 399.386719 232.28125 399.386719 240.023438 C 399.386719 247.722656 401.519531 253.746094 405.714844 257.933594 C 409.914062 262.121094 415.925781 264.242188 423.578125 264.242188 C 431.28125 264.242188 437.3125 262.121094 441.511719 257.933594 C 445.710938 253.746094 447.839844 247.699219 447.839844 239.957031 C 447.839844 232.261719 445.710938 226.238281 441.511719 222.046875 C 437.3125 217.859375 431.28125 215.738281 423.578125 215.738281 "/><path fill="currentColor" d="M 502.152344 217.285156 C 502.273438 217.640625 502.335938 218.136719 502.335938 218.75 L 502.335938 247.546875 C 502.335938 254.15625 499.265625 257.96875 492.953125 259.203125 C 491.644531 259.457031 490.359375 259.585938 489.132812 259.585938 C 485.535156 259.585938 482.648438 258.523438 480.554688 256.425781 C 478.460938 254.332031 477.398438 251.542969 477.398438 248.132812 L 477.398438 218.75 C 477.398438 218.09375 477.460938 217.578125 477.582031 217.21875 L 477.980469 216.386719 L 467.335938 216.386719 L 467.644531 217.128906 L 467.695312 217.21875 C 467.738281 217.347656 467.8125 217.722656 467.8125 218.75 L 467.8125 248.585938 C 467.8125 252.664062 469.175781 256.160156 471.863281 258.964844 C 474.546875 261.769531 478.253906 263.5 482.886719 264.109375 C 484.539062 264.328125 486.144531 264.4375 487.664062 264.4375 C 493.675781 264.4375 498.480469 262.84375 501.949219 259.691406 C 505.242188 256.664062 506.914062 252.558594 506.914062 247.484375 L 506.914062 218.75 C 506.914062 218.308594 506.953125 217.8125 507.03125 217.261719 L 507.160156 217.140625 L 507.316406 216.382812 L 501.921875 216.457031 Z M 502.152344 217.285156 "/><path fill="currentColor" d="M 551.78125 230.027344 C 551.648438 236.386719 548.445312 239.476562 541.980469 239.476562 L 538.996094 239.476562 L 538.996094 220.851562 L 542.316406 220.851562 C 545.617188 220.851562 548.082031 221.65625 549.644531 223.25 C 551.125 224.761719 551.84375 227.042969 551.78125 230.027344 M 558.347656 220.984375 C 556.222656 218.765625 553.226562 217.304688 549.441406 216.652344 C 548.40625 216.476562 547.289062 216.386719 546.121094 216.386719 L 529.128906 216.453125 L 529.347656 217.246094 C 529.433594 217.664062 529.476562 218.167969 529.476562 218.75 L 529.476562 261.296875 C 529.476562 261.925781 529.433594 262.449219 529.359375 262.828125 L 528.960938 263.660156 L 539.578125 263.660156 L 539.363281 263.242188 L 539.191406 262.863281 C 539.105469 262.453125 539.0625 261.929688 539.0625 261.296875 L 539.0625 244.070312 L 543.050781 244.070312 C 547.976562 244.070312 552.046875 243.164062 555.148438 241.371094 C 558.140625 239.609375 560.074219 237.195312 560.890625 234.195312 C 561.339844 232.53125 561.566406 230.914062 561.566406 229.386719 C 561.566406 226.039062 560.484375 223.210938 558.347656 220.984375 "/><path fill="currentColor" d="M 187.796875 257.292969 L 187.796875 239.824219 C 187.796875 239.238281 187.839844 238.734375 187.914062 238.363281 L 188.3125 237.53125 L 171.019531 237.53125 L 171.019531 241.1875 L 178.542969 241.1875 L 178.542969 257.953125 C 176.578125 259.035156 174.25 259.585938 171.617188 259.585938 C 167.40625 259.585938 164 258.050781 161.484375 255.019531 C 158.78125 251.800781 157.410156 247.191406 157.410156 241.320312 C 157.410156 239.308594 157.589844 237.140625 157.941406 234.875 C 158.597656 230.464844 160.332031 226.921875 163.097656 224.339844 C 165.855469 221.765625 169.238281 220.460938 173.152344 220.460938 C 176.511719 220.460938 179.96875 221.453125 183.425781 223.40625 C 184.390625 223.960938 185.234375 224.519531 185.929688 225.070312 L 186.394531 225.433594 L 186.394531 218.359375 L 186.210938 218.289062 C 181.96875 216.640625 177.285156 215.804688 172.285156 215.804688 C 165.75 215.804688 160.300781 217.425781 156.085938 220.621094 C 151.863281 223.828125 149.128906 228.339844 147.964844 234.035156 C 147.429688 236.550781 147.15625 239.011719 147.15625 241.351562 C 147.15625 248.355469 149.390625 253.960938 153.792969 258.015625 C 158.1875 262.0625 164.164062 264.113281 171.550781 264.113281 C 175.746094 264.113281 180.242188 263.4375 184.914062 262.097656 C 186.167969 261.75 187.234375 261.398438 188.085938 261.050781 L 188.347656 260.945312 L 188.242188 260.679688 C 187.945312 259.945312 187.796875 258.804688 187.796875 257.292969 "/><path fill="currentColor" d="M 327.964844 257.292969 L 327.964844 239.824219 C 327.964844 239.238281 328.007812 238.734375 328.085938 238.363281 L 328.484375 237.53125 L 311.191406 237.53125 L 311.191406 241.1875 L 318.714844 241.1875 L 318.714844 257.953125 C 316.75 259.035156 314.417969 259.585938 311.785156 259.585938 C 307.578125 259.585938 304.167969 258.050781 301.65625 255.019531 C 298.949219 251.800781 297.582031 247.191406 297.582031 241.320312 C 297.582031 239.308594 297.757812 237.140625 298.113281 234.875 C 298.765625 230.464844 300.5 226.921875 303.265625 224.339844 C 306.027344 221.765625 309.410156 220.460938 313.324219 220.460938 C 316.683594 220.460938 320.140625 221.453125 323.597656 223.40625 C 324.558594 223.960938 325.402344 224.519531 326.101562 225.070312 L 326.5625 225.433594 L 326.5625 218.359375 L 326.382812 218.289062 C 322.140625 216.640625 317.453125 215.804688 312.453125 215.804688 C 305.921875 215.804688 300.46875 217.425781 296.253906 220.621094 C 292.03125 223.828125 289.300781 228.339844 288.136719 234.035156 C 287.597656 236.550781 287.328125 239.011719 287.328125 241.351562 C 287.328125 248.355469 289.558594 253.960938 293.964844 258.015625 C 298.359375 262.0625 304.335938 264.113281 311.71875 264.113281 C 315.914062 264.113281 320.414062 263.4375 325.085938 262.097656 C 326.339844 261.75 327.40625 261.398438 328.253906 261.050781 L 328.519531 260.945312 L 328.414062 260.679688 C 328.117188 259.941406 327.964844 258.804688 327.964844 257.292969 "/></symbol>
+</svg>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand"><svg viewBox="0 0 506 214" role="img" aria-label="Kigo Group"><use href="#logo"/></svg><small>Đào tạo sản phẩm<br>Khối Marketing · 11/2026</small></div>
+    <ol class="toc" id="toc"></ol>
+    <div class="foot">
+      <button class="play" id="play" type="button">▶&nbsp; Trình chiếu</button>
+      <button class="editbtn" id="editbtn" type="button" hidden>✎&nbsp; Sửa nội dung</button>
+      <div class="updated">Cập nhật: 17/11/2026<span id="editstate" style="display:block"></span></div>
+    </div>
+  </aside>
+
+  <div class="stagewrap" id="stagewrap">
+    <div class="stage" id="stage">
+
+<!-- ===================== PHẦN 1 ===================== -->
+      <section class="slide cover" data-t="Bìa" data-part="Phần 1 · Về Kigo Group">
+        <div class="panel">
+          <svg viewBox="0 0 506 214" role="img" aria-label="Kigo Group"><use href="#logo"/></svg>
+          <div class="meta">
+            <div><b>Đơn vị</b><span>Khối Marketing</span></div>
+            <div><b>Người trình bày</b><span>Hào – Quản lý Marketing</span></div>
+            <div><b>Thời gian</b><span>Tháng 11/2026</span></div>
+          </div>
+        </div>
+        <div class="main">
+          <div class="kicker">Tài liệu đào tạo nội bộ</div>
+          <h1>Đào tạo sản phẩm Kigo Group</h1>
+          <span class="script">Product Training</span>
+          <ul class="goals"><li>Hiểu rõ công ty</li><li>Nắm bắt sản phẩm</li><li>Thống nhất cách tư vấn</li></ul>
+          <div class="brands">Eikenbi<i>·</i>Lhamo<i>·</i>Ampleur<i>·</i>Ninemila</div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Kigo là ai?">
+        <div class="kicker">Phần 1 · Về Kigo Group</div>
+        <h2>Kigo là ai?</h2>
+        <div class="body">
+          <div class="duo w">
+            <p class="lede">Đơn vị phân phối sản phẩm <b>làm đẹp</b> và <b>chăm sóc sức khỏe cao cấp</b>, thành lập tháng 11/2023 tại Hà Nội.</p>
+            <div>
+              <div class="line"><span class="tag">Danh mục</span><p>Xây dựng từ nền tảng thương hiệu Nhật Bản, mở rộng với các thương hiệu quốc tế được chọn lọc.</p></div>
+              <div class="line"><span class="tag">Vai trò</span><p>Kết nối thương hiệu với thị trường qua phân phối, truyền thông, bán hàng và hỗ trợ đối tác.</p></div>
+            </div>
+          </div>
+          <div class="kpis mt">
+            <div class="kpi"><b>11/2023</b><span>Thành lập tại Hà Nội</span></div>
+            <div class="kpi"><b class="w">Nhật Bản</b><span>Nền tảng thương hiệu của danh mục</span></div>
+            <div class="kpi"><b>4 Brands</b><span>Thương hiệu trọng tâm: Eikenbi, Lhamo, Ampleur, Ninemila</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Kindness in every goal">
+        <div class="kicker">Giá trị cốt lõi</div>
+        <h2>Kindness in every goal</h2>
+        <div class="body">
+          <div class="duo">
+            <div>
+              <p class="lede">Sự tử tế trong từng mục tiêu.</p>
+              <p class="small" style="font-size:19px;color:var(--text)">Mỗi mục tiêu KIGO theo đuổi đều gắn với trách nhiệm đối với:</p>
+              <div class="who3">
+                <div><b>Khách hàng</b></div>
+                <div><b>Đối tác</b></div>
+                <div><b>Đội ngũ</b></div>
+              </div>
+            </div>
+            <div>
+              <div class="tagx" style="margin-bottom:14px">Sự tử tế thể hiện qua cách</div>
+              <div class="ask"><span class="k">01</span><div><b>Lựa chọn sản phẩm</b></div></div>
+              <div class="ask"><span class="k">02</span><div><b>Cung cấp thông tin</b></div></div>
+              <div class="ask"><span class="k">03</span><div><b>Thực hiện cam kết</b></div></div>
+              <div class="ask"><span class="k">04</span><div><b>Giải quyết vấn đề</b></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Tiêu chuẩn lựa chọn sản phẩm">
+        <div class="kicker">Phần 1 · Về Kigo Group</div>
+        <h2>Tiêu chuẩn lựa chọn của Kigo</h2>
+        <div class="body">
+          <div class="pillars">
+            <div class="pillar"><span class="k">01</span><h3>Thành phần và công nghệ</h3></div>
+            <div class="pillar"><span class="k">02</span><h3>Uy tín của nhà sản xuất</h3></div>
+            <div class="pillar"><span class="k">03</span><h3>Nguồn gốc và hồ sơ liên quan</h3></div>
+            <div class="pillar"><span class="k">04</span><h3>Giá trị thương hiệu</h3></div>
+            <div class="pillar"><span class="k">05</span><h3>Khả năng đáp ứng nhu cầu thị trường</h3></div>
+          </div>
+          <div class="note"><span class="tagx">Với nhân viên</span><span>Hiểu những yếu tố tạo nên giá trị sản phẩm để giới thiệu đúng và có sức thuyết phục.</span></div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Từ kênh sỉ đến kênh bán lẻ">
+        <div class="kicker">Phần 1 · Về Kigo Group</div>
+        <h2>Từ kênh sỉ đến kênh bán lẻ</h2>
+        <div class="body">
+          <div class="flow">
+            <div class="step"><span class="tagx">Khởi đầu</span><h3>Kênh sỉ</h3><div class="chips"><span>Đại lý</span><span>Nhà thuốc</span><span>Spa</span><span>Cửa hàng mỹ phẩm</span><span>Cửa hàng mẹ và bé</span></div></div>
+            <div class="step"><span class="tagx">Phát triển</span><h3>Kênh bán lẻ</h3><div class="chips"><span>kigora.vn &amp; kigora.com</span><span>Sàn thương mại điện tử</span><span>Livestream</span></div></div>
+            <div class="step"><span class="tagx">Tiếp theo</span><h3>Thị trường quốc tế</h3><p>Đưa về thêm thương hiệu sức khỏe và sắc đẹp chất lượng từ khắp thế giới. Đưa hàng ra phân phối tại Canada, Mỹ, Ấn Độ,...</p></div>
+          </div>
+          <div class="note"><span class="tagx">Nguyên tắc</span><span>Thông tin sản phẩm nhất quán giữa các kênh. Giá, ưu đãi và quyền lợi áp dụng theo chính sách của từng kênh.</span></div>
+          <p class="small">4 thương hiệu hôm nay mới là bước khởi đầu.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Định hướng phát triển">
+        <div class="kicker">Phần 1 · Về Kigo Group</div>
+        <h2>Định hướng phát triển</h2>
+        <div class="body">
+          <div class="duo" style="grid-template-columns:520px 1fr;align-items:stretch">
+            <div class="event"><span class="tagx">Mục tiêu</span><p>Trở thành tập đoàn uy tín trong lĩnh vực làm đẹp và chăm sóc sức khỏe.</p></div>
+            <div>
+              <div class="ask"><span class="k">01</span><div><b>Quan hệ chiến lược với thương hiệu quốc tế</b></div></div>
+              <div class="ask"><span class="k">02</span><div><b>Mở rộng danh mục cao cấp</b><p>Nhật Bản, Hàn Quốc, châu Âu, Hoa Kỳ và những thị trường phù hợp.</p></div></div>
+              <div class="ask"><span class="k">03</span><div><b>Hệ thống phân phối đáng tin cậy tại nhiều thị trường</b></div></div>
+              <div class="ask"><span class="k">04</span><div><b>Nâng cao chất lượng vận hành và trải nghiệm khách hàng</b></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Bốn thương hiệu trọng tâm">
+        <div class="kicker">Phần 1 · Về Kigo Group</div>
+        <h2>Bốn thương hiệu trọng tâm</h2>
+        <div class="body">
+          <div class="duo" style="grid-template-columns:1fr 430px;gap:64px">
+            <div>
+              <table class="tbl">
+                <thead><tr><th style="width:190px">Thương hiệu</th><th style="width:160px">Xuất xứ</th><th>Nhóm sản phẩm trong buổi học</th></tr></thead>
+                <tbody>
+                  <tr><td class="ch">Eikenbi</td><td>Nhật Bản</td><td>Bổ sung dinh dưỡng và chăm sóc da, cơ thể</td></tr>
+                  <tr><td class="ch">Lhamo</td><td>Nhật Bản</td><td>Bổ sung dinh dưỡng và chăm sóc cơ thể từ bên trong</td></tr>
+                  <tr><td class="ch">Ampleur</td><td>Nhật Bản</td><td>Chăm sóc da, chống nắng và trang điểm</td></tr>
+                  <tr><td class="ch">Ninemila</td><td>Hàn Quốc</td><td>Chăm sóc tóc và da đầu cùng cơ thể</td></tr>
+                </tbody>
+              </table>
+              <p class="small">Bốn thương hiệu trọng tâm của buổi đào tạo, thuộc danh mục nhiều thương hiệu KIGO đang kinh doanh.</p>
+            </div>
+            <div class="side">
+              <h3>Chăm sóc từ bên trong đến bên ngoài</h3>
+              <div><b>Bổ sung dinh dưỡng</b><span>Các sản phẩm uống của Eikenbi và Lhamo</span></div>
+              <div><b>Chăm sóc và bảo vệ da</b><span>Glow X3 cùng các sản phẩm Ampleur, Ninemila</span></div>
+              <div><b>Chăm sóc tóc và da đầu cùng cơ thể</b><span>Ninemila</span></div>
+              <span style="font-size:15px;color:var(--muted);line-height:1.5;border-top:1px solid var(--flamingo);padding-top:16px">Kết hợp dựa trên nhu cầu thực tế, cách sử dụng và khả năng chi trả của khách hàng.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- ===================== PHẦN 2 ===================== -->
+      <section class="slide prod" data-t="Krill Oil Eikenbi" data-part="Phần 2 · Sản phẩm trọng tâm">
+        <div class="pic"><div class="ph"><img src="img/sp/krill-oil-eikenbi.webp" alt="Krill Oil Eikenbi"></div>
+          <div class="price"><span>Hộp 60 viên</span><b>899.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Eikenbi · Omega-3</div>
+          <h2>Krill Oil Eikenbi</h2>
+          <p class="lead">Omega-3 thế hệ mới: hấp thu tốt hơn dầu cá, không lo ợ tanh.</p>
+          <p class="desc">Dầu nhuyễn thể Nam Cực chứa omega-3 ở dạng phospholipid, chính là chất cấu tạo nên màng tế bào, nên cơ thể hấp thu dễ hơn omega-3 trong dầu cá. Sắc đỏ của viên dầu đến từ astaxanthin tự nhiên, một chất chống oxy hóa rất mạnh.</p>
+          <div class="klabel">Hàm lượng trong 6 viên</div>
+          <div class="kpis">
+            <div class="kpi"><b>804<small>mg</small></b><span>Phospholipid</span></div>
+            <div class="kpi"><b>241,2<small>mg</small></b><span>EPA</span></div>
+            <div class="kpi"><b>110,55<small>mg</small></b><span>DHA</span></div>
+            <div class="kpi"><b>60,3<small>mg</small></b><span>DPA</span></div>
+            <div class="kpi"><b>0,16<small>mg</small></b><span>Astaxanthin</span></div>
+          </div>
+          <div class="two">
+            <div><h4>Phù hợp với</h4><p>Người cần chăm sóc tim mạch, mỡ máu, trí nhớ; dân văn phòng hay khô mỏi mắt; người đau nhức xương khớp, da khô thiếu đàn hồi.</p></div>
+            <div><h4>Cách dùng</h4><p>Uống 2–6 viên/ngày sau bữa ăn, duy trì tối thiểu 3 tháng.</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Nghệ Nano Fucoidan Eikenbi">
+        <div class="pic"><div class="ph"><img src="img/sp/nghe-nano.webp" alt="Nghệ Nano Tảo Nâu Fucoidan Eikenbi"></div>
+          <div class="price"><span>Hộp 15 ống x 10ml</span><b>1.380.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Eikenbi · Nghệ nano</div>
+          <h2>Nghệ Nano Tảo Nâu Fucoidan</h2>
+          <p class="lead">Nghệ uống trực tiếp, curcumin hấp thu cao gấp 2.000 lần nước nghệ thường.</p>
+          <p class="desc">Nghệ thường khó uống, dễ nóng và cơ thể hấp thu rất ít. Công nghệ nano giải quyết cả ba điều đó.</p>
+          <div class="klabel" style="margin-bottom:8px">Mỗi ống 10ml còn có thêm</div>
+          <div class="ing">
+            <div><b>Fucoidan</b>Từ tảo nâu Mozuku Okinawa: tăng đề kháng, hỗ trợ tiêu hóa</div>
+            <div><b>L-Ornithine</b>Từ nghêu Shijimi: hỗ trợ gan, phục hồi sau rượu bia</div>
+            <div><b>Saffron</b>Giúp thư giãn, sáng da</div>
+            <div><b>Dưỡng chất khác</b>HA, mật ong hữu cơ, enzyme thực vật, vitamin E và nhóm B</div>
+          </div>
+          <div class="two">
+            <div><h4>Phù hợp với</h4><p>Người dạ dày yếu, hay đầy hơi khó tiêu, thức khuya, uống rượu bia, da mụn và xỉn màu.</p></div>
+            <div><h4>Cách dùng · 1 ống/ngày</h4><p>Trước bữa ăn 30 phút để hỗ trợ dạ dày. Sau bữa ăn 30 phút để chăm sóc sức khỏe chung và làn da.</p></div>
+          </div>
+          <p class="tip">Mỗi ống nghệ Eikenbi tương đương 5–10 ống nghệ Hàn Quốc khác.</p>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Nhau thai ngựa Mongolia Eikenbi">
+        <div class="pic"><div class="ph"><img src="img/sp/nhau-thai-mongolia.webp" alt="Mongolia Placenta Liquid Eikenbi"></div>
+          <div class="price"><span>Hộp 30 ống x 10ml</span><b>4.500.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Eikenbi · Nhau thai ngựa</div>
+          <h2>Mongolia Placenta Liquid</h2>
+          <p class="desc" style="margin-top:16px">Nhau thai ngựa chiến Mông Cổ giàu axit amin, khoáng chất và yếu tố tăng trưởng, hàm lượng dưỡng chất cao hơn nhau thai heo hay cừu. Kết hợp cùng collagen, NMN, HA và elastin, chăm sóc làn da và nội tiết từ bên trong.</p>
+          <div class="klabel">Trong mỗi ống</div>
+          <div class="kpis">
+            <div class="kpi"><b>9.000<small>mg</small></b><span>Nhau thai ngựa chiến Mông Cổ</span></div>
+            <div class="kpi"><b>3.000<small>mg</small></b><span>Collagen</span></div>
+            <div class="kpi"><b>150<small>mg</small></b><span>NMN</span></div>
+          </div>
+          <div class="two eq">
+            <div><h4>Công dụng</h4><ul class="dots"><li>Mờ thâm nám, tàn nhang; da căng mịn, giảm nếp nhăn</li><li>Điều hòa nội tiết, cải thiện sinh lý nam và nữ</li><li>Ngủ ngon hơn, bớt mệt mỏi, tăng đề kháng</li></ul></div>
+            <div><h4>Phù hợp với</h4><p>Phụ nữ từ 30 tuổi muốn chậm lão hóa, người bị nám lâu năm, nội tiết kém, hay mất ngủ.</p></div>
+          </div>
+          <p class="tip"><b>Liệu trình:</b> 1 ống/ngày trong 3 tháng, uống 30 phút trước khi ngủ. Sau đó nghỉ 3 tháng rồi duy trì 1 ống mỗi 1–3 ngày.</p>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Kem body Glow X3 Eikenbi">
+        <div class="pic"><div class="ph"><img src="img/sp/glow-x3.webp" alt="Kem body nâng tone Glow X3 Eikenbi"></div>
+          <div class="price"><span>Tuýp 200g</span><b>679.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Eikenbi · Dưỡng body</div>
+          <h2>Kem body Nâng Tone Glow X3</h2>
+          <p class="lead">Nâng tone trắng mướt ngay lập tức, dưỡng trắng sáng da theo thời gian khi sử dụng đều đặn, đặc biệt kháng nước chống trôi cực tốt.</p>
+          <p class="desc">Hiệu ứng nâng tone giúp da sáng đều màu ngay sau khi thoa. Bên dưới là bộ hoạt chất dưỡng sáng, cùng collagen kiwi lên men và tế bào gốc táo giúp da mềm ẩm.</p>
+          <div class="klabel">5 hoạt chất dưỡng sáng</div>
+          <div class="kpis words">
+            <div class="kpi"><b>Niacinamide</b></div>
+            <div class="kpi"><b>Glutathione</b></div>
+            <div class="kpi"><b>Arbutin</b></div>
+            <div class="kpi"><b>VC-IP</b></div>
+            <div class="kpi"><b>Vitamin C</b></div>
+          </div>
+          <div class="two eq">
+            <div><h4>Kết cấu</h4><p>Chất kem mỏng nhẹ, thấm nhanh, không bết dính, không vệt trắng, thoảng hương hoa anh đào.</p></div>
+            <div><h4>Cách dùng</h4><p>Thoa sau khi tắm, lúc da sạch và khô. Ra nắng thì xịt thêm chống nắng VC.</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Krill Oil Lhamo Premium">
+        <div class="pic"><div class="ph"><img src="img/sp/krill-oil-lhamo.webp" alt="Krill Oil Lhamo Premium"></div>
+          <div class="price"><span>Hộp 90 viên</span><b>1.190.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Lhamo · Omega-3</div>
+          <h2>Krill Oil Lhamo Premium</h2>
+          <p class="lead">Cùng chất lượng với Krill Oil Eikenbi, hộp lớn tiết kiệm hơn.</p>
+          <p class="desc">Công thức giống hệt Krill Oil Eikenbi. Điểm khác nằm ở quy cách hộp và mức giá.</p>
+          <table class="tbl">
+            <thead><tr><th></th><th class="fig">Eikenbi</th><th class="fig">Lhamo Premium</th></tr></thead>
+            <tbody>
+              <tr><td>Số viên</td><td class="fig">60 viên</td><td class="fig">90 viên</td></tr>
+              <tr><td>Giá</td><td class="fig">899.000đ</td><td class="fig">1.190.000đ</td></tr>
+              <tr><td>Giá mỗi viên</td><td class="fig">khoảng 15.000đ</td><td class="fig"><b>khoảng 13.200đ</b></td></tr>
+              <tr><td>Dùng 2 viên/ngày</td><td class="fig">30 ngày</td><td class="fig"><b>45 ngày</b></td></tr>
+            </tbody>
+          </table>
+          <div class="vs" style="margin-top:26px">
+            <div><b>Khách dùng thử lần đầu</b><p>Gợi ý Krill Oil Eikenbi</p></div>
+            <div><b>Dùng lâu dài hoặc mua làm quà</b><p>Gợi ý Krill Oil Lhamo</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Inner Rose Lhamo">
+        <div class="pic"><div class="ph"><img src="img/sp/inner-rose.webp" alt="Viên uống thơm cơ thể Inner Rose Lhamo"></div>
+          <div class="price"><span>Hộp 60 viên</span><b>1.250.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Lhamo · Viên uống thơm cơ thể</div>
+          <h2>Inner Rose Lhamo</h2>
+          <p class="lead">“Nước hoa” dạng uống, thơm tự nhiên từ bên trong.</p>
+          <p class="desc">Tinh dầu hoa hồng Damask Bulgaria, loại hồng cho tinh dầu quý nhất thế giới, giúp cơ thể tỏa hương nhẹ qua da và hơi thở. Nấm Champignon xử lý mùi từ đường ruột, cùng trà xanh, hương thảo, nụ tầm xuân, HA và vitamin E nuôi dưỡng làn da.</p>
+          <div class="vs">
+            <div><b>Nước hoa</b><p>Chỉ che mùi trong vài tiếng.</p></div>
+            <div><b>Inner Rose</b><p>Xử lý mùi từ gốc, hương nhẹ và bền hơn. Hỗ trợ da ẩm sáng, cân bằng nội tiết và giấc ngủ.</p></div>
+          </div>
+          <div class="two">
+            <div><h4>Phù hợp với</h4><p>Người hay đổ mồ hôi, có mùi cơ thể, làm nghề tiếp xúc gần hoặc không hợp nước hoa nồng. Đặc biệt sản phẩm không chỉ giúp khử mùi, tỏa hương thơm mà còn giúp cải thiện nội tiết tố nữ &amp; độ tươi trẻ, căng sáng của làn da.</p></div>
+            <div><h4>Cách dùng</h4><p>Uống 2 viên mỗi ngày.</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Xịt chống nắng VC Ampleur">
+        <div class="pic"><div class="ph"><img src="img/sp/xit-vc.webp" alt="Xịt chống nắng VC Ampleur"></div>
+          <div class="price"><span>Giá bán</span><b>570.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Ampleur · Chống nắng</div>
+          <h2>Xịt chống nắng VC Ampleur</h2>
+          <p class="lead">SPF50+/PA++++ dạng xịt finish trong suốt, dùng cho cả mặt, body, tóc và da đầu.</p>
+          <p class="desc">Chỉ số chống nắng cao nhất theo tiêu chuẩn Nhật. Lớp xịt trong suốt, khô nhanh, không bết, không trắng bệch, xịt đè lên lớp trang điểm vẫn ổn. Chống nước, chống mồ hôi, rửa sạch bằng sữa tắm thường.</p>
+          <div class="klabel" style="margin-bottom:8px">Ngoài chống nắng</div>
+          <div class="ing">
+            <div><b>3 dạng vitamin C</b>Da sáng, giảm thâm do nắng</div>
+            <div><b>HA và collagen</b>Dưỡng ẩm</div>
+            <div><b>Rau má và cam thảo</b>Làm dịu da</div>
+            <div><b>Thành phần giảm mùi</b>Giảm mùi mồ hôi</div>
+          </div>
+          <div class="two">
+            <div><h4>Cách dùng</h4><p>Lắc đều, xịt cách da 10–20cm. Khi xịt mặt nhớ nhắm mắt, nín thở.</p></div>
+            <div><h4>Điểm đáng nói</h4><p>Tại Nhật, đây là sản phẩm giới hạn chỉ bán mùa xuân hè.</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Tone Up Sakura Ampleur">
+        <div class="pic"><div class="ph"><img src="img/sp/tone-up-sakura.webp" alt="Kem chống nắng W Protect UV Tone Up Sakura Ampleur"></div>
+          <div class="price"><span>Tuýp 30g</span><b>1.250.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Ampleur · Chống nắng mặt</div>
+          <h2>W Protect UV Tone Up Sakura</h2>
+          <p class="lead">Chống nắng và kem lót nâng tone trắng hồng trong cùng một bước.</p>
+          <div class="kpis words" style="margin-top:26px">
+            <div class="kpi"><b>SPF50+</b><span>PA++++</span></div>
+            <div class="kpi"><b>★★</b><span>Chống nước</span></div>
+            <div class="kpi"><b class="w" style="font-size:24px">Ánh sáng xanh</b><span>Chắn cả ánh sáng xanh và bụi mịn</span></div>
+          </div>
+          <p class="desc" style="margin-top:24px">Lớp kem màu hồng anh đào che xỉn màu, ửng đỏ và thâm mụn, cho da tươi tắn tự nhiên mà không cần thêm kem lót. Panthenol, Ectoin, chiết xuất lá anh đào và ô liu Setouchi giữ hàng rào da khỏe, hợp cả với da dễ kích ứng khi giao mùa.</p>
+          <div class="two eq" style="margin-top:0">
+            <div><h4>Cách dùng</h4><p>Thoa sau bước dưỡng ẩm, khoảng 2 hạt ngọc trai cho toàn mặt.</p></div>
+            <div><h4>Dặm lại</h4><p>Ở ngoài trời lâu thì dặm lại sau 4–5 giờ.</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide prod" data-t="Phấn phủ Face Powder Ampleur">
+        <div class="pic"><div class="ph two-img">
+            <figure><img src="img/sp/face-powder.webp" alt="Face Powder Ampleur"><figcaption>Face Powder</figcaption></figure>
+            <figure><img src="img/sp/face-powder-cool.webp" alt="Face Powder Cool Ampleur"><figcaption>Face Powder Cool</figcaption></figure>
+          </div>
+          <div class="price"><span>Hộp 10g</span><b>1.563.000đ</b></div></div>
+        <div class="pmain"><div class="pbody">
+          <div class="kicker">Ampleur · Trang điểm</div>
+          <h2>Phấn phủ Face Powder</h2>
+          <p class="lead">Mỗi lần dặm phấn là một lần dặm chống nắng.</p>
+          <p class="desc">Phấn phủ SPF50+ có dẫn xuất hydroquinone (arbutin) và 11 dưỡng chất như vitamin E, CoQ10, nhau thai, HA. Vừa che lỗ chân lông và xỉn màu, vừa nuôi da sáng dần trong lúc trang điểm.</p>
+          <div class="vs">
+            <div><b>Face Powder · SPF50+/PA+++</b><p>Mịn nhẹ, dùng quanh năm, hợp da thường đến khô.</p></div>
+            <div><b>Face Powder Cool · SPF50+/PA++++</b><p>Mát lạnh khi ra mồ hôi, sắc xanh băng trung hòa da vàng và ửng đỏ, hợp da dầu và mùa nóng.</p></div>
+          </div>
+          <div class="two" style="grid-template-columns:1fr">
+            <div><h4>Cách dùng</h4><p>Dùng bông phấn đi kèm, ấn nhẹ toàn mặt, dặm thêm ở cánh mũi và khóe miệng.</p></div>
+          </div>
+        </div></div>
+      </section>
+
+      <section class="slide img" data-t="Ninemila · Bìa" data-part="Ninemila · No.1 Hair Care tại Olive Young"><img src="img/ninemila/nm-01.webp" alt="Slide Ninemila trang 1" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Giới thiệu thương hiệu"><img src="img/ninemila/nm-02.webp" alt="Slide Ninemila trang 2" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Điểm bán hàng"><img src="img/ninemila/nm-03.webp" alt="Slide Ninemila trang 3" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Top 1 tại Hàn Quốc"><img src="img/ninemila/nm-04.webp" alt="Slide Ninemila trang 4" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Triết lý và hệ sinh thái"><img src="img/ninemila/nm-05.webp" alt="Slide Ninemila trang 5" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Bằng sáng chế"><img src="img/ninemila/nm-06.webp" alt="Slide Ninemila trang 6" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Thử nghiệm lâm sàng"><img src="img/ninemila/nm-07.webp" alt="Slide Ninemila trang 7" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Giới thiệu sản phẩm"><img src="img/ninemila/nm-08.webp" alt="Slide Ninemila trang 8" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Bộ Men bia"><img src="img/ninemila/nm-09.webp" alt="Slide Ninemila trang 9" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Tẩy TBC da đầu Men bia"><img src="img/ninemila/nm-10.webp" alt="Slide Ninemila trang 10" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Dầu gội Men bia"><img src="img/ninemila/nm-11.webp" alt="Slide Ninemila trang 11" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Kem xả Men bia"><img src="img/ninemila/nm-12.webp" alt="Slide Ninemila trang 12" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Serum da đầu Men bia"><img src="img/ninemila/nm-13.webp" alt="Slide Ninemila trang 13" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Dầu gội Bạc hà táo"><img src="img/ninemila/nm-14.webp" alt="Slide Ninemila trang 14" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Dầu gội Collagen đỏ"><img src="img/ninemila/nm-15.webp" alt="Slide Ninemila trang 15" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Dầu dưỡng 9 loại hạt"><img src="img/ninemila/nm-16.webp" alt="Slide Ninemila trang 16" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Nhuộm phủ bạc dạng bọt"><img src="img/ninemila/nm-17.webp" alt="Slide Ninemila trang 17" loading="lazy"></section>
+      <section class="slide img" data-t="Ninemila · Bộ 4 sản phẩm"><img src="img/ninemila/nm-18.webp" alt="Slide Ninemila trang 18" loading="lazy"></section>
+
+<!-- ===================== PHẦN 3 ===================== -->
+      <section class="slide" data-t="Khách cần gì, ưu tiên sản phẩm nào?" data-part="Phần 3 · Tư vấn theo vấn đề">
+        <div class="kicker">Phần 3 · Tư vấn theo vấn đề của khách</div>
+        <h2>Khách cần gì, ưu tiên sản phẩm nào?</h2>
+        <div class="body" style="padding-block:20px">
+          <table class="tbl tight">
+            <thead><tr><th style="width:52%">Nhu cầu của khách</th><th>Hướng lựa chọn</th></tr></thead>
+            <tbody>
+              <tr><td>Bổ sung omega-3</td><td class="ch">Krill Oil Eikenbi hoặc Lhamo</td></tr>
+              <tr><td>Bổ sung nghệ, chăm sóc hệ tiêu hóa</td><td class="ch">Nghệ Nano Fucoidan Eikenbi</td></tr>
+              <tr><td>Bổ sung dưỡng chất chăm sóc da</td><td class="ch">Mongolia Placenta Liquid Eikenbi</td></tr>
+              <tr><td>Dưỡng da cơ thể, cần hiệu ứng nâng tone</td><td class="ch">Glow X3</td></tr>
+              <tr><td>Chống nắng cho mặt, muốn nền da sáng hơn</td><td class="ch">Tone Up Sakura</td></tr>
+              <tr><td>Chống nắng dạng xịt tiện dụng</td><td class="ch">Xịt VC Ampleur</td></tr>
+              <tr><td>Hoàn thiện, dặm lại lớp trang điểm</td><td class="ch">Face Powder</td></tr>
+              <tr><td>Hỗ trợ giảm mùi cơ thể</td><td class="ch">Inner Rose</td></tr>
+              <tr><td>Chăm sóc tóc và da đầu</td><td class="ch">Ninemila theo nhu cầu cụ thể</td></tr>
+            </tbody>
+          </table>
+          <p class="small" style="margin-top:16px">Mỗi gợi ý thêm cần có lý do phù hợp với khách hàng.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Tình huống: tóc rụng, mỏng, xẹp">
+        <div class="kicker">Tình huống 1 · Tóc rụng nhiều, mỏng và xẹp</div>
+        <p class="quote">“Dạo này chải đầu rụng cả nắm, tóc mỏng xẹp, buộc lên thấy cả da đầu.”</p>
+        <div class="body">
+          <div class="advise">
+            <div class="intro">
+              <div class="tagx" style="margin-bottom:12px">Hỏi trước</div>
+              <p>Da đầu khô hay dầu, có gàu không? Gần đây có thức khuya, căng thẳng hay mới sinh không?</p>
+              <div class="tagx" style="margin:30px 0 12px">Bổ sung</div>
+              <p>Uống thêm Krill Oil để nuôi da đầu từ bên trong. Nhắc khách kiên trì 2–3 tháng, vì tóc mới cần thời gian để mọc.</p>
+            </div>
+            <div>
+              <div class="tagx" style="margin-bottom:12px">Chu trình 4 bước Ninemila Men bia</div>
+              <div class="ask compact"><span class="k">1</span><div><b>Tẩy tế bào chết da đầu</b><p>1–2 lần/tuần, làm thông thoáng chân tóc</p></div></div>
+              <div class="ask compact"><span class="k">2</span><div><b>Dầu gội Men bia giảm rụng</b><p>Giữ bọt trên da đầu 2–3 phút rồi xả</p></div></div>
+              <div class="ask compact"><span class="k">3</span><div><b>Serum da đầu</b><p>Nuôi chân tóc, hỗ trợ tóc con mọc lại</p></div></div>
+              <div class="ask compact"><span class="k">4</span><div><b>Kem xả Men bia</b><p>Chỉ thoa thân và ngọn, giữ tóc bồng bềnh từ chân</p></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Tình huống: đi nắng, sợ đen và nám">
+        <div class="kicker">Tình huống 2 · Đi nắng nhiều, sợ đen và nám</div>
+        <p class="quote">“Sáng nào em cũng bôi kem chống nắng mà vẫn đen, tay chân còn đen hơn mặt.”</p>
+        <div class="body">
+          <p class="lead3" style="margin-top:0">Thường không phải do kem kém, mà do kem đã hết tác dụng sau vài giờ và không được dặm lại. Gợi ý <b style="color:var(--velvet)">bộ chống nắng 3 lớp của Ampleur</b>:</p>
+          <div class="layers">
+            <div><b>Buổi sáng</b><p>Tone Up<small>Cho mặt</small></p></div>
+            <div><b>Trước khi ra đường</b><p>Xịt VC<small>Cho tay, chân, cổ và tóc</small></p></div>
+            <div><b>Giữa ngày</b><p>Phấn phủ + Xịt VC<small>Dặm phấn cho mặt, xịt lại cho body</small></p></div>
+          </div>
+          <div class="duo" style="margin-top:30px;gap:56px;grid-template-columns:repeat(3,1fr)">
+            <div class="line" style="border-top:none;padding-top:0"><span class="tag">Buổi tối</span><p>Thoa Glow X3 cho body.</p></div>
+            <div class="line" style="border-top:none;padding-top:0"><span class="tag">Nếu đã có nám</span><p>Gợi ý thêm Nhau thai ngựa.</p></div>
+            <div class="line" style="border-top:none;padding-top:0"><span class="tag">Sau khi đội mũ bảo hiểm</span><p>Dầu gội Bạc hà táo Ninemila giúp da đầu mát và sạch.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Tình huống: mùi cơ thể">
+        <div class="kicker">Tình huống 3 · Mùi cơ thể và sự tự tin</div>
+        <p class="quote">“Em hay ra mồ hôi, ngại đứng gần người khác, xịt nước hoa thì lẫn mùi còn khó chịu hơn.”</p>
+        <div class="body">
+          <div class="layers" style="margin-top:0">
+            <div><b>Từ bên trong</b><p>Inner Rose<small>Xử lý mùi từ bên trong, cơ thể thơm nhẹ tự nhiên</small></p></div>
+            <div><b>Khi ra ngoài</b><p>Xịt VC<small>Có thành phần giảm mùi mồ hôi, vừa chống nắng vừa dễ chịu</small></p></div>
+            <div><b>Khi tắm gội</b><p>Bộ tắm gội hương nước hoa Ninemila<small>Giữ mùi thơm từ tóc đến da</small></p></div>
+          </div>
+          <p class="closing">Thơm từ bên trong, sạch từ bên ngoài – đó mới là cách giải quyết tận gốc.</p>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Hỏi – đáp: hàng và giá">
+        <div class="kicker">Hỏi – đáp · 1/3</div>
+        <h2>Về hàng và giá</h2>
+        <div class="body">
+          <div class="qa one">
+            <div><b>“Hàng có chính hãng không?”</b><p>KIGO nhập khẩu chính ngạch, sản phẩm có tem chống giả và nhãn phụ tiếng Việt.</p></div>
+            <div><b>“Sao chỗ khác bán rẻ hơn?”</b><p>Hàng trôi nổi thường là xách tay, cận date hoặc hàng nhái, không rõ bảo quản ra sao. Mua tại KIGO, chị được đảm bảo chính hãng và có người theo sát cả liệu trình.</p></div>
+            <div><b>“Đắt quá.”</b><p>Quy ra mỗi ngày: Krill Oil Lhamo chỉ khoảng 26.000đ cho 2 viên. Sau đó hỏi khách muốn giải quyết vấn đề nào trước, bắt đầu từ một sản phẩm.</p></div>
+            <div><b>“Để chị suy nghĩ thêm.”</b><p>Hỏi xem chị còn băn khoăn về giá, hiệu quả hay cách dùng, trả lời đúng điểm đó rồi hẹn thời gian liên hệ lại.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Hỏi – đáp: sản phẩm uống">
+        <div class="kicker">Hỏi – đáp · 2/3</div>
+        <h2>Về sản phẩm uống</h2>
+        <div class="body">
+          <div class="qa">
+            <div><b>“Krill Oil khác dầu cá thế nào?”</b><p>Omega-3 dạng phospholipid hòa được cả trong nước lẫn dầu nên cơ thể hấp thu dễ, không phụ thuộc bữa ăn nhiều dầu mỡ như dầu cá. Có sẵn astaxanthin chống oxy hóa, không gây ợ tanh.</p></div>
+            <div><b>“Eikenbi hay Lhamo tốt hơn?”</b><p>Cùng một công thức. Lhamo hộp 90 viên nên tính ra mỗi viên rẻ hơn.</p></div>
+            <div><b>“Uống nghệ có nóng không? Đau dạ dày uống được không?”</b><p>Nghệ nano dễ hấp thu, không tồn đọng như tinh bột nghệ nên không gây nóng. Người đau dạ dày đặc biệt nên uống và uống trước bữa ăn 30 phút.</p></div>
+            <div><b>“Nhau thai bao lâu thì thấy hiệu quả?”</b><p>Da ẩm và căng mướt thường cảm nhận sớm hơn, thâm nám mờ rõ sau một liệu trình 3 tháng.</p></div>
+            <div><b>“Inner Rose khác viên hoa hồng DHC ra sao?”</b><p>DHC chủ yếu tạo hương. Inner Rose có thêm nấm Champignon khử mùi từ gốc và các thành phần dưỡng da.</p></div>
+            <div><b>“Đang mang thai, cho con bú hay dùng thuốc thì sao?”</b><p>Khuyên khách hỏi ý kiến bác sĩ trước khi dùng sản phẩm uống. Người dị ứng hải sản không dùng Krill Oil.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" data-t="Hỏi – đáp: mỹ phẩm và Ninemila">
+        <div class="kicker">Hỏi – đáp · 3/3</div>
+        <h2>Về mỹ phẩm và Ninemila</h2>
+        <div class="body">
+          <div class="qa">
+            <div><b>“Xịt thì có đủ chống nắng không?”</b><p>Xịt đến khi da ướt đều là đủ. Với mặt, nên dùng Tone Up làm lớp nền, còn xịt để dặm lại trong ngày.</p></div>
+            <div><b>“Glow X3 có phải kem trộn không?”</b><p>Không. Sáng ngay là nhờ hiệu ứng nâng tone, trắng dần là nhờ Niacinamide, Glutathione, Arbutin và Vitamin C.</p></div>
+            <div><b>“Phấn phủ 10g mà gần 1,6 triệu?”</b><p>Một hộp vừa là phấn phủ, vừa là kem chống nắng SPF50+, vừa dưỡng sáng. Mỗi lần chỉ cần ấn nhẹ nên dùng rất lâu.</p></div>
+            <div><b>“Gội men bia có mùi bia không?”</b><p>Không, dòng Men bia có hương bưởi.</p></div>
+            <div><b>“Bao lâu thì đỡ rụng tóc?”</b><p>Tóc rụng giảm sau 2 tháng, tóc con mọc mới cần 3–5 tuần là thấy rõ. Dùng đủ bộ sẽ thấy rõ hơn chỉ dùng dầu gội.</p></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <div class="nav"><button type="button" id="prev" aria-label="Slide trước">←</button><span id="pos">1</span><button type="button" id="next" aria-label="Slide sau">→</button></div>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const slides=[...document.querySelectorAll(".slide")];
+const N=slides.length;
+const pad=n=>String(n).padStart(2,"0");
+slides.forEach((s,i)=>{
+  if(s.classList.contains("cover"))return;
+  if(s.classList.contains("img")){const t=document.createElement("span");t.className="pgtag";t.textContent=`${pad(i+1)} / ${pad(N)}`;s.appendChild(t);return}
+  const f=document.createElement("div");f.className="sfoot";
+  f.innerHTML=`<svg viewBox="0 0 506 214" aria-hidden="true"><use href="#logo"/></svg><span>Đào tạo sản phẩm Kigo Group</span><span class="pg">${pad(i+1)} / ${pad(N)}</span>`;
+  (s.querySelector(".pmain")||s).appendChild(f);
+});
+$("#toc").innerHTML=slides.map((s,i)=>(s.dataset.part?`<li class="part">${s.dataset.part}</li>`:"")+`<li><button type="button" data-i="${i}"><span class="n">${pad(i+1)}</span><span>${s.dataset.t}</span></button></li>`).join("");
+let cur=0;
+function go(i,push=true){
+  cur=Math.max(0,Math.min(N-1,i));
+  slides.forEach((s,j)=>s.classList.toggle("on",j===cur));
+  document.querySelectorAll(".toc button").forEach((b,j)=>b.setAttribute("aria-current",String(j===cur)));
+  const on=document.querySelector('.toc button[aria-current="true"]');if(on&&!phone())on.scrollIntoView({block:"nearest"});
+  $("#pos").textContent=`${cur+1} / ${N}`;
+  if(push){try{history.replaceState(null,"","#slide-"+(cur+1))}catch(e){}}
+}
+const fromHash=()=>{const m=/^#slide-(\d+)$/.exec(location.hash);return m?parseInt(m[1],10)-1:0};
+const phone=()=>matchMedia("(max-width:900px)").matches;
+function fit(){
+  const w=$("#stagewrap"), st=$("#stage");
+  if(phone()){st.style.transform="";return}
+  const show=document.body.classList.contains("show"), p=show?0:56, bottom=show?0:44;
+  const k=Math.min((w.clientWidth-p)/1600,(w.clientHeight-p-bottom)/900);
+  st.style.transform=`translate(-50%,-50%) scale(${Math.max(.2,k)})`;
+}
+addEventListener("resize",fit);
+$("#toc").addEventListener("click",e=>{const b=e.target.closest("[data-i]");if(b)go(+b.dataset.i)});
+$("#prev").addEventListener("click",()=>go(cur-1));
+$("#next").addEventListener("click",()=>go(cur+1));
+document.addEventListener("keydown",e=>{
+  if(phone()||e.target.isContentEditable)return;
+  if(["ArrowRight","PageDown"," "].includes(e.key)){e.preventDefault();go(cur+1)}
+  else if(["ArrowLeft","PageUp"].includes(e.key)){e.preventDefault();go(cur-1)}
+  else if(e.key==="Home")go(0); else if(e.key==="End")go(N-1);
+  else if(e.key==="Escape"&&document.body.classList.contains("show"))exitShow();
+});
+let tx=null;
+$("#stagewrap").addEventListener("touchstart",e=>{tx=e.touches[0].clientX},{passive:true});
+$("#stagewrap").addEventListener("touchend",e=>{if(tx==null||phone())return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50)go(cur+(d<0?1:-1));tx=null});
+$("#stage").addEventListener("click",e=>{if(document.body.classList.contains("show")&&!e.target.closest("a,button"))go(cur+1)});
+function exitShow(){document.body.classList.remove("show");try{if(document.fullscreenElement)document.exitFullscreen().catch(()=>{})}catch(e){}requestAnimationFrame(fit)}
+$("#play").addEventListener("click",()=>{
+  document.body.classList.add("show");
+  try{const r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();r&&r.catch(()=>{})}catch(e){}
+  requestAnimationFrame(fit);
+});
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.body.classList.contains("show"))exitShow();else requestAnimationFrame(fit)});
+addEventListener("hashchange",()=>go(fromHash(),false));
+go(fromHash(),false); fit();
+
+/* ---------- SỬA NỘI DUNG ----------
+   Mỗi đoạn chữ trên slide có mã data-k (số trang-thứ tự). Chữ đã sửa lưu trong sua.json
+   dạng {mã: nội dung}; trang mở ra sẽ áp các chỗ sửa đó lên nội dung gốc.
+   Nút "Sửa nội dung" chỉ hiện ở bản trên Claude (nơi trang tự lưu được). */
+const INLINE=new Set(["B","I","EM","STRONG","SMALL","BR"]);
+const ORIG={};
+slides.forEach((s,si)=>{
+  if(s.classList.contains("img"))return;
+  let k=0;
+  s.querySelectorAll("*").forEach(el=>{
+    if(el.closest(".sfoot,svg,[data-k]")||!el.textContent.trim())return;
+    if([...el.querySelectorAll("*")].some(c=>!INLINE.has(c.tagName)))return;
+    el.dataset.k=(si+1)+"-"+(k++); ORIG[el.dataset.k]=el.innerHTML.trim();
+  });
+});
+function clean(html){
+  const t=document.createElement("template");t.innerHTML=html;
+  (function walk(n){[...n.childNodes].forEach(c=>{
+    if(c.nodeType===1){walk(c);
+      if(!INLINE.has(c.tagName)){c.replaceWith(...c.childNodes)}
+      else{[...c.attributes].forEach(a=>c.removeAttribute(a.name))}}
+    else if(c.nodeType!==3)c.remove();
+  })})(t.content);
+  return t.innerHTML.replace(/ /g," ").replace(/\s+/g," ").trim();
+}
+const unitsAll=()=>[...document.querySelectorAll("[data-k]")];
+let SAVED={};
+fetch("sua.json",{cache:"no-store"}).then(r=>r.ok?r.json():{}).then(m=>{
+  SAVED=m||{};
+  Object.entries(SAVED).forEach(([k,v])=>{const el=document.querySelector(`[data-k="${k}"]`);if(el)el.innerHTML=clean(v)});
+}).catch(()=>{});
+
+let artifactNS=null, snapshot=null;
+const bar=document.createElement("div");bar.className="editbar";bar.hidden=true;
+bar.innerHTML=`<span class="msg" id="editmsg"><b>Đang sửa.</b> Bấm vào chữ trên slide để sửa, dùng mục lục hoặc nút mũi tên để sang trang khác.</span><button type="button" class="cancel" id="editcancel">Hủy</button><button type="button" class="save" id="editsave">Lưu</button>`;
+$("#stagewrap").appendChild(bar);
+const msg=t=>{$("#editmsg").innerHTML=t};
+function markChanged(el){el.classList.toggle("changed",clean(el.innerHTML)!==(SAVED[el.dataset.k]!=null?clean(SAVED[el.dataset.k]):ORIG[el.dataset.k]))}
+function setEditing(on){
+  document.body.classList.toggle("editing",on); bar.hidden=!on; $("#editbtn").hidden=on;
+  unitsAll().forEach(el=>{if(on)el.setAttribute("contenteditable","true");else{el.removeAttribute("contenteditable");el.classList.remove("changed")}});
+}
+$("#editbtn").addEventListener("click",()=>{snapshot=Object.fromEntries(unitsAll().map(el=>[el.dataset.k,el.innerHTML]));setEditing(true)});
+$("#editcancel").addEventListener("click",()=>{unitsAll().forEach(el=>{if(snapshot&&snapshot[el.dataset.k]!=null)el.innerHTML=snapshot[el.dataset.k]});setEditing(false)});
+document.addEventListener("input",e=>{const el=e.target.closest&&e.target.closest("[data-k]");if(el)markChanged(el)});
+document.addEventListener("paste",e=>{if(!e.target.closest||!e.target.closest("[data-k]"))return;e.preventDefault();document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text/plain").replace(/\s+/g," "))});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.isContentEditable&&!e.shiftKey){e.preventDefault();e.target.blur()}});
+$("#editsave").addEventListener("click",async()=>{
+  const out={};
+  unitsAll().forEach(el=>{const v=clean(el.innerHTML);if(v!==clean(ORIG[el.dataset.k]))out[el.dataset.k]=v});
+  const btn=$("#editsave");btn.disabled=true;msg("<b>Đang lưu…</b>");
+  try{
+    await artifactNS.publish({"sua.json":{content:JSON.stringify(out,null,1),contentType:"application/json"}});
+    SAVED=out;setEditing(false);msg("");
+    const n=Object.keys(out).length;$("#editbtn").innerHTML="✓&nbsp; Đã lưu · Sửa tiếp";setTimeout(()=>{$("#editbtn").innerHTML="✎&nbsp; Sửa nội dung"},4000);
+  }catch(err){
+    const c=err&&err.code;
+    if(c==="conflict")msg("<b>Có người vừa lưu bản khác.</b> Trang đang tải lại bản mới nhất, chỗ vừa sửa chưa được lưu.");
+    else if(c==="not_writer"||c==="not_granted"||c==="capability_disabled"||c==="consent_required"){msg("<b>Không lưu được:</b> tài khoản này chỉ có quyền xem.");$("#editbtn").remove()}
+    else if(c==="rate_limited")msg("<b>Lưu quá nhanh.</b> Đợi vài giây rồi bấm Lưu lại.");
+    else msg("<b>Chưa lưu được</b> do lỗi kết nối. Bấm Lưu lại sau ít giây.");
+  }finally{btn.disabled=false}
+});
+/* Chỉ bật ở bản trên Claude: chờ window.claude xuất hiện (tối đa 15 giây), rồi xin quyền tự lưu. */
+(function waitClaude(t0){
+  const onWeb=/github\.io$/.test(location.hostname)||location.protocol==="file:";
+  if(onWeb)return;
+  const st=$("#editstate");
+  if(!(window.claude&&window.claude.use)){
+    if(Date.now()-t0<15000){st.textContent="Chế độ sửa: đang kết nối…";return setTimeout(()=>waitClaude(t0),300)}
+    st.textContent="Chế độ sửa: chưa kết nối được. Đóng trang rồi mở lại link.";return;
+  }
+  st.textContent="Chế độ sửa: đang kết nối…";
+  window.claude.use("artifact").then(ns=>{
+    if(ns){artifactNS=ns;$("#editbtn").hidden=false;st.textContent=""}
+    else st.textContent="Chế độ sửa không dùng được ở cửa sổ này. Mở link bằng trình duyệt (Chrome) để sửa.";
+  }).catch(()=>{st.textContent="Chế độ sửa: chưa kết nối được. Đóng trang rồi mở lại link."});
+})(Date.now());
+</script>
+</body>
+</html>
