@@ -1,6 +1,6 @@
 # Đào tạo sản phẩm Kigo Group
 
-Bộ slide đào tạo nội bộ (41 trang): về Kigo Group, sản phẩm Eikenbi, Lhamo, Ampleur, Ninemila và cách tư vấn theo vấn đề của khách.
+Bộ slide đào tạo nội bộ (42 trang): về Kigo Group, sản phẩm Eikenbi, Lhamo, Ampleur, Ninemila và cách tư vấn theo vấn đề của khách.
 
 - Xem: https://kigogroupvn-dot.github.io/dao-tao-san-pham-kigo/
 - Toàn bộ nội dung nằm trong `index.html`. Ảnh sản phẩm ở `img/sp/`, 18 trang Ninemila ở `img/ninemila/`.

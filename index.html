@@ -214,6 +214,36 @@ body.show .stagewrap{background:#1d1416}
 .slide.img img{width:100%;height:100%;object-fit:cover;display:block}
 .slide.img .pgtag{position:absolute;right:22px;bottom:16px;font-family:var(--f-head);font-weight:700;font-size:13px;color:var(--velvet);background:rgba(255,255,255,.85);border-radius:999px;padding:5px 12px;font-variant-numeric:tabular-nums}
 
+/* ---------- KÊNH · mỗi nền tảng một cột, đầu cột đỏ; nhóm con là hộp riêng có thanh nhãn ---------- */
+.tg{display:inline-block;font-family:var(--f-head);font-weight:700;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 6px 2px;border-radius:4px;line-height:1.2;white-space:nowrap}
+.tg.on{background:var(--crimson);color:var(--white)}
+.tg.off{background:#EEE7E6;color:var(--muted)}
+.k2 h2 .cnt{font-family:var(--f-head);font-weight:900;color:var(--crimson);font-size:.6em;margin-left:10px}
+.k2 .cols{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px;align-items:start}
+.k2 .col{display:grid;gap:10px;align-content:start}
+.k2 .col.w2{grid-column:span 2}
+.k2 .hd{background:var(--crimson);color:var(--white);border-radius:10px;padding:13px 14px 11px;display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.k2 .hd span{font-family:var(--f-title);font-weight:700;font-size:22px}
+.k2 .hd b{font-family:var(--f-head);font-weight:900;font-size:30px;line-height:1}
+.k2 .col:nth-child(even) .hd{background:var(--velvet)}
+.k2 .split{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.k2 .stack{display:grid;gap:10px;align-content:start}
+.k2 .box{border:1px solid var(--rule);border-radius:10px;background:var(--white);overflow:hidden}
+.k2 .lab{display:flex;justify-content:space-between;align-items:center;background:var(--misty);padding:7px 12px;font-family:var(--f-head);font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--velvet)}
+.k2 .lab i{font-style:normal;color:var(--crimson);letter-spacing:0;font-size:13px}
+.k2 .lk{display:grid;grid-template-columns:1fr auto;gap:2px 8px;padding:9px 12px;border-top:1px solid var(--rule);text-decoration:none;color:var(--velvet);transition:background .15s}
+.k2 .box>.lk:first-child{border-top:none}
+.k2 .lab+.lk{border-top:none}
+.k2 .lk:hover{background:var(--paper)}
+.k2 .lk .nm{font-weight:600;font-size:14.5px;line-height:1.25}
+.k2 .lk .ds{grid-column:1;font-size:12px;color:var(--muted);line-height:1.3}
+.k2 .lk .tg{grid-column:1;justify-self:start;margin-top:3px}
+.k2 .lk .ar{grid-column:2;grid-row:1/span 3;align-self:center;font-family:var(--f-head);font-weight:700;color:var(--crimson);transition:transform .18s}
+.k2 .lk:hover .ar{transform:translate(2px,-2px)}
+.k2 .lk.off{background:var(--paper)}
+.k2 .lk.off .nm{color:var(--muted)}
+@media (max-width:900px){.k2 .cols{grid-template-columns:1fr 1fr}.k2 .col.w2{grid-column:1/-1}}
+
 /* ---------- SỬA NỘI DUNG ---------- */
 .editbtn{white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--white);color:var(--crimson);border:1px solid var(--crimson);border-radius:8px;padding:10px 14px;font-family:var(--f-head);font-weight:700;font-size:13px;letter-spacing:.06em;cursor:pointer}
 .editbtn:hover{background:var(--misty)}
@@ -305,6 +335,12 @@ body.editing [data-k].changed{outline-color:var(--flamingo);outline-style:solid}
           <ul class="goals"><li>Hiểu rõ công ty</li><li>Nắm bắt sản phẩm</li><li>Thống nhất cách tư vấn</li></ul>
           <div class="brands">Eikenbi<i>·</i>Lhamo<i>·</i>Ampleur<i>·</i>Ninemila</div>
         </div>
+      </section>
+
+      <section class="slide k2" data-t="Tổng hợp các kênh">
+        <div class="kicker">Phần 1 · Về Kigo Group</div>
+        <h2>Tổng hợp các kênh <span class="cnt">19 kênh</span></h2>
+        <div class="body" style="justify-content:flex-start;padding-top:26px"><div class="cols"><div class="col"><div class="hd"><span>Website</span><b>2</b></div><div class="box"><a class="lk" href="https://kigora.vn" target="_blank" rel="noopener"><span class="nm">kigora.vn</span><span class="ds">Kigo Group Việt Nam</span><span class="ar">↗</span></a><a class="lk" href="https://kigora.com" target="_blank" rel="noopener"><span class="nm">kigora.com</span><span class="ds">Kigo Group Global</span><span class="ar">↗</span></a></div></div><div class="col w2"><div class="hd"><span>Facebook</span><b>9</b></div><div class="split"><div class="stack"><div class="box"><div class="lab"><span>Kigo</span><i>4</i></div><a class="lk" href="https://web.facebook.com/kigogroupvn" target="_blank" rel="noopener"><span class="nm">Kigo Group</span><span class="ds">Branding</span><span class="ar">↗</span></a><a class="lk" href="https://web.facebook.com/Kigogroup.cosmetic" target="_blank" rel="noopener"><span class="nm">Kigo Store</span><span class="ds">Ads lẻ · team Trinh</span><span class="tg on">Đang chạy</span><span class="ar">↗</span></a><a class="lk off" href="https://web.facebook.com/profile.php?id=61573523321257" target="_blank" rel="noopener"><span class="nm">Kigo Group</span><span class="ds">Ads lẻ</span><span class="tg off">Không chạy</span><span class="ar">↗</span></a><a class="lk off" href="https://web.facebook.com/profile.php?id=61572643026835" target="_blank" rel="noopener"><span class="nm">Dầu nhuyễn thể</span><span class="ds">Ads lẻ</span><span class="tg off">Không chạy</span><span class="ar">↗</span></a></div><div class="box"><div class="lab"><span>Lhamo</span><i>1</i></div><a class="lk" href="https://web.facebook.com/profile.php?id=61576135049608" target="_blank" rel="noopener"><span class="nm">Lhamo</span><span class="ds">Fanpage</span><span class="ar">↗</span></a></div></div><div class="stack"><div class="box"><div class="lab"><span>Ninemila</span><i>4</i></div><a class="lk" href="https://web.facebook.com/ninemila.vn" target="_blank" rel="noopener"><span class="nm">Ninemila</span><span class="ds">Branding</span><span class="ar">↗</span></a><a class="lk" href="https://web.facebook.com/profile.php?id=61594100023081" target="_blank" rel="noopener"><span class="nm">Page ads 01</span><span class="ds">Ads lẻ · team Trinh</span><span class="tg on">Đang chạy</span><span class="ar">↗</span></a><a class="lk off" href="https://web.facebook.com/profile.php?id=61594465527759" target="_blank" rel="noopener"><span class="nm">Page ads 02</span><span class="ds">Ads lẻ</span><span class="tg off">Không chạy</span><span class="ar">↗</span></a><a class="lk off" href="https://web.facebook.com/ninemilavietnam" target="_blank" rel="noopener"><span class="nm">Page ads 03</span><span class="ds">Ads lẻ</span><span class="tg off">Không chạy</span><span class="ar">↗</span></a></div></div></div></div><div class="col"><div class="hd"><span>Instagram</span><b>2</b></div><div class="box"><a class="lk" href="https://www.instagram.com/kigo.wellness/" target="_blank" rel="noopener"><span class="nm">IG Global</span><span class="ds">@kigo.wellness</span><span class="ar">↗</span></a><a class="lk" href="https://www.instagram.com/ninemilavn/" target="_blank" rel="noopener"><span class="nm">IG Ninemilavn</span><span class="ds">@ninemilavn</span><span class="ar">↗</span></a></div></div><div class="col"><div class="hd"><span>Tiktok</span><b>4</b></div><div class="box"><div class="lab"><span>Kênh</span><i>2</i></div><a class="lk" href="https://www.tiktok.com/@kigogroupvietnam" target="_blank" rel="noopener"><span class="nm">Kigo Group Vietnam</span><span class="ds">@kigogroupvietnam</span><span class="ar">↗</span></a><a class="lk" href="https://www.tiktok.com/@ninemila.vietnam" target="_blank" rel="noopener"><span class="nm">Ninemila</span><span class="ds">@ninemila.vietnam</span><span class="ar">↗</span></a></div><div class="box"><div class="lab"><span>Shop</span><i>2</i></div><a class="lk" href="https://vt.tiktok.com/ZS9fqJA1GxfHC-lRS4j/" target="_blank" rel="noopener"><span class="nm">Kigo Group Vietnam</span><span class="ds">Gian hàng</span><span class="ar">↗</span></a><a class="lk" href="https://vt.tiktok.com/ZS9fqJsu1nAGj-09hNR/" target="_blank" rel="noopener"><span class="nm">Ninemilavn</span><span class="ds">Gian hàng</span><span class="ar">↗</span></a></div></div><div class="col"><div class="hd"><span>Shopee</span><b>1</b></div><div class="box"><a class="lk" href="https://s.shopee.vn/6VPUo9HwxI" target="_blank" rel="noopener"><span class="nm">Kigo - Sức Khỏe và Làm Đẹp</span><span class="ds">Gian hàng</span><span class="ar">↗</span></a></div></div><div class="col"><div class="hd"><span>Threads</span><b>1</b></div><div class="box"><a class="lk" href="https://www.threads.com/@ninemilavn" target="_blank" rel="noopener"><span class="nm">Ninemilavn</span><span class="ds">@ninemilavn</span><span class="ar">↗</span></a></div></div></div></div>
       </section>
 
       <section class="slide" data-t="Kigo là ai?">
@@ -863,6 +899,7 @@ function setEditing(on){
 }
 $("#editbtn").addEventListener("click",()=>{snapshot=Object.fromEntries(unitsAll().map(el=>[el.dataset.k,el.innerHTML]));setEditing(true)});
 $("#editcancel").addEventListener("click",()=>{unitsAll().forEach(el=>{if(snapshot&&snapshot[el.dataset.k]!=null)el.innerHTML=snapshot[el.dataset.k]});setEditing(false)});
+document.addEventListener("click",e=>{if(document.body.classList.contains("editing")&&e.target.closest&&e.target.closest(".k2 a"))e.preventDefault()},true);
 document.addEventListener("input",e=>{const el=e.target.closest&&e.target.closest("[data-k]");if(el)markChanged(el)});
 document.addEventListener("paste",e=>{if(!e.target.closest||!e.target.closest("[data-k]"))return;e.preventDefault();document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text/plain").replace(/\s+/g," "))});
 document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.isContentEditable&&!e.shiftKey){e.preventDefault();e.target.blur()}});
